@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Ristorante</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ICONES -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+
+/* NAVBAR SOBRE A IMAGEM */
+.navbar {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+/* HERO */
+.hero {
+    height: 80vh;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('img/RISTORANTE.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+/* LOGO NAVBAR */
+.navbar-brand img {
+    height: 40px;
+}
+
+/* LOGO HERO */
+.massas-logo img {
+    height: 200px;
+}
+
+/* BOTÃO HERO */
+.btn-custom {
+    border-radius: 30px;
+    padding: 10px 30px;
+}
+
+/* PRODUTOS */
+.produtos {
+    background-image: url('img/Design sem nome.png');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+/* IMAGEM PRODUTO */
+.produto-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* ===== BOTÃO CARRINHO (SEPARADO) ===== */
+
+.btn-carrinho-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ÍCONE */
+.btn-icon {
+    background: rgba(255,255,255,0.75);
+    border: none;
+    border-radius: 15px;
+    padding: 10px 14px;
+    backdrop-filter: blur(6px);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* TEXTO */
+.btn-texto {
+    background: rgba(255,255,255,0.75);
+    border: none;
+    border-radius: 30px;
+    padding: 10px 25px;
+    font-size: 14px;
+    backdrop-filter: blur(6px);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+/* HOVER */
+.btn-icon:hover,
+.btn-texto:hover {
+    background: rgba(255,255,255,0.95);
+    transform: scale(1.05);
+}
+
+/* CLICK */
+.btn-icon:active,
+.btn-texto:active {
+    transform: scale(0.95);
+}
+
+/* FOOTER */
+.footer-custom {
+    background: #000;
+    color: white;
+    padding: 60px 0;
+}
+
+.logo-footer {
+    height: 70px;
+}
+
+.titulo-redes {
+    display: inline-block;
+    background: white;
+    color: black;
+    padding: 5px 15px;
+    font-weight: bold;
+}
+
+.redes i {
+    font-size: 22px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.redes i:hover {
+    transform: scale(1.2);
+}
+
+.user {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+<div class="container">
+
+<a class="navbar-brand" href="#">
+    <img src="img/logo.png" alt="Logo">
+</a>
+
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="#">Cardápio</a></li>
+<li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Sobre</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Reservas</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+</ul>
+</div>
+
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero text-white text-center">
+<div class="container">
+
+<a class="massas-logo" href="#">
+    <img src="img/massas.png" alt="Logo">
+</a>
+
+<p class="mt-3">
+Descubra uma experiência gastronômica de tirar o fôlego, onde cada prato é uma obra-prima e cada ingrediente é selecionado com o mais alto rigor.</p>
+<p>Seja seduzido pela fusão de sabores que só os restaurantes mais exclusivos podem oferecer.</p>
+
+
+<button class="btn btn-light btn-custom mt-4">
+SAIBA MAIS
+</button>
+
+</div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="produtos py-5 text-center">
+<div class="container">
+
+<h3 class="mb-5">PRODUTOS EM DESTAQUE</h3>
+
+<div class="row justify-content-center">
+
+<!-- ITEM 1 -->
+<div class="col-md-4 mb-4">
+<img src="https://i.pinimg.com/736x/7f/ca/87/7fca8779cefce45ca9df0e677c4cfd12.jpg"
+class="produto-img mb-3">
+<h5>Fettuccine</h5>
+
+<div class="btn-carrinho-box">
+    <button class="btn-icon" onclick="window.location.href='fettuccine.html'">
+        <i class="bi bi-cart-fill"></i>
+    </button>
+    <button class="btn-texto" onclick="window.location.href='fettuccine.html'">
+        VER MAIS
+    </button>
+</div>
+</div>
+
+<!-- ITEM 2 -->
+<div class="col-md-4 mb-4">
+<img src="https://i.pinimg.com/736x/42/d6/a8/42d6a8928f8bd852dcd4f70adbfbb09a.jpg"
+class="produto-img mb-3">
+<h5>Lasagnete</h5>
+
+<div class="btn-carrinho-box">
+    <button class="btn-icon" onclick="window.location.href='lasanha.html'">
+        <i class="bi bi-cart-fill"></i>
+    </button>
+    <button class="btn-texto" onclick="window.location.href='lasanha.html'">
+        VER MAIS
+    </button>
+</div>
+</div>
+
+<!-- ITEM 3 -->
+<div class="col-md-4 mb-4">
+<img src="https://i.pinimg.com/736x/8a/44/6a/8a446a9d4e7bdddb3776acb0dbe2d4db.jpg"
+class="produto-img mb-3">
+<h5>Spaghetti</h5>
+
+<div class="btn-carrinho-box">
+    <button class="btn-icon" onclick="window.location.href='spaghetti.html'">
+        <i class="bi bi-cart-fill"></i>
+    </button>
+    <button class="btn-texto" onclick="window.location.href='spaghetti.html'">
+        VER MAIS
+    </button>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-custom">
+<div class="container">
+<div class="row text-center text-md-start align-items-center">
+
+<div class="col-md-4 mb-4">
+<img src="img/logo.png" class="logo-footer">
+</div>
+
+<div class="col-md-4 text-center">
+<h4 class="titulo-redes">nossas redes</h4>
+
+<div class="redes mt-3">
+<i class="bi bi-whatsapp"></i>
+<i class="bi bi-tiktok"></i>
+<i class="bi bi-instagram"></i>
+</div>
+
+<p class="user">@ristorante</p>
+</div>
+
+<div class="col-md-2">
+<h5>Localização</h5>
+<p>Av. Francisco Rodrigues, 171</p>
+</div>
+
+<div class="col-md-2">
+<h5>Contato</h5>
+<p>11 00000-0000</p>
+</div>
+
+</div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

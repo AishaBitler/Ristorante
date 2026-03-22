@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fettuccine - Ristorante</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+
+/* NAVBAR */
+.navbar {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    background: transparent !important;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+/* FUNDO */
+.bg-produto {
+    background: url('img/Design sem nome.png') center/cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.bg-produto::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.conteudo {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+}
+
+/* IMAGEM */
+.produto-img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* ===== TEXTO SOFISTICADO ===== */
+
+.conteudo h2 {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.preco {
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #e6e6e6;
+}
+
+.descricao-prato {
+    max-width: 500px;
+    margin: 15px auto;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #f1f1f1;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* BOTÕES */
+.area-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-add {
+    background: #dcdcdc;
+    border-radius: 25px;
+    padding: 10px 30px;
+    border: none;
+    font-weight: bold;
+}
+
+/* CARRINHO */
+.carrinho {
+    position: fixed;
+    right: -380px;
+    top: 0;
+    width: 380px;
+    height: 100%;
+    background: #111;
+    color: white;
+    padding: 20px;
+    transition: 0.3s;
+    z-index: 999;
+    overflow-y: auto;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    border-left: 1px solid #444;
+}
+
+.carrinho.ativo {
+    right: 0;
+}
+
+.item {
+    border-bottom: 1px solid #444;
+    padding: 10px 0;
+}
+
+.total {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+/* FRETE */
+.frete-box input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+}
+
+.frete-box button {
+    margin-top: 10px;
+    width: 100%;
+}
+
+#resultado p {
+    color: white;
+    margin: 5px 0;
+}
+
+.btn-danger {
+    width: 100%;
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+<div class="container">
+
+<a class="navbar-brand" href="index.html">
+    <img src="img/logo.png" alt="Logo">
+</a>
+
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link active" href="#">Serviços</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Reservas</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Galeria</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+</ul>
+</div>
+</div>
+</nav>
+
+<!-- CARRINHO -->
+<div class="carrinho" id="carrinho">
+    <h4>Seu Carrinho</h4>
+
+    <div id="lista"></div>
+
+    <div class="total">Subtotal: R$ <span id="subtotal">0.00</span></div>
+    <div class="total">Frete: R$ <span id="frete">0.00</span></div>
+    <div class="total"><strong>Total: R$ <span id="total">0.00</span></strong></div>
+
+    <hr>
+
+    <div class="frete-box">
+        <input type="text" id="cep-input" placeholder="Digite seu CEP">
+        <button onclick="consultarCEP()" class="btn btn-light">Calcular Frete</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <button onclick="toggleCarrinho()" class="btn btn-danger mt-3">Fechar</button>
+</div>
+
+<!-- PRODUTO -->
+<section class="bg-produto">
+<div class="conteudo">
+
+    <img src="https://i.pinimg.com/736x/7f/ca/87/7fca8779cefce45ca9df0e677c4cfd12.jpg" class="produto-img">
+
+    <h2>Fettuccine</h2>
+    <p class="preco">$22.00</p>
+
+    <p class="descricao-prato">
+    Massa longa e delicada envolvida em um molho cremoso e bem temperado, 
+    finalizada com queijos selecionados, oferecendo um prato elegante e cheio de sabor.
+    </p>
+
+    <div class="area-botoes">
+        <button class="btn btn-light" onclick="toggleCarrinho()">
+            <i class="bi bi-cart"></i>
+        </button>
+
+        <button class="btn-add" onclick="addCarrinho()">
+            ADICIONAR AO CARRINHO
+        </button>
+    </div>
+
+</div>
+</section>
+
+<script>
+// CONFIG
+let carrinho = []
+let precoUSD = 22
+const taxaCambio = 5.2
+let valorFrete = 0
+
+function toggleCarrinho(){
+    document.getElementById("carrinho").classList.toggle("ativo")
+}
+
+function addCarrinho(){
+    const precoBRL = precoUSD * taxaCambio
+    carrinho.push({nome: "Fettuccine", preco: precoBRL})
+    atualizarCarrinho()
+}
+
+function atualizarCarrinho(){
+    let lista = document.getElementById("lista")
+    let subtotal = 0
+    lista.innerHTML = ""
+
+    carrinho.forEach(item => {
+        lista.innerHTML += `<div class="item">${item.nome} - R$ ${item.preco.toFixed(2)}</div>`
+        subtotal += item.preco
+    })
+
+    document.getElementById("subtotal").innerText = subtotal.toFixed(2)
+    document.getElementById("frete").innerText = valorFrete.toFixed(2)
+    document.getElementById("total").innerText = (subtotal + valorFrete).toFixed(2)
+}
+
+// CEP igual
+async function buscarEnderecoPorCEP(cep) {
+    const cepLimpo = cep.replace(/\D/g, '')
+    if (cepLimpo.length !== 8) throw new Error("CEP inválido")
+
+    const response = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`)
+    const data = await response.json()
+
+    if (data.erro) throw new Error("CEP não encontrado")
+    return data
+}
+
+function calcularFrete(uf){
+    const tabela = { SP:15, RJ:18, MG:20, PR:25, SC:28, RS:30, BA:28, PE:30, AM:45 }
+    return tabela[uf] || 30
+}
+
+async function consultarCEP(){
+    let cep = document.getElementById("cep-input").value
+    let resultado = document.getElementById("resultado")
+    resultado.innerHTML = "Calculando..."
+
+    try{
+        let endereco = await buscarEnderecoPorCEP(cep)
+        valorFrete = calcularFrete(endereco.uf)
+
+        resultado.innerHTML = `
+            <p>${endereco.localidade} - ${endereco.uf}</p>
+            <p>Frete: R$ ${valorFrete.toFixed(2)}</p>
+        `
+        atualizarCarrinho()
+    }catch(e){
+        resultado.innerHTML = `<p style="color:red">${e.message}</p>`
+    }
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
