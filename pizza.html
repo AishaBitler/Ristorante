@@ -229,21 +229,38 @@
 </section>
 
 <script>
-// ===== CONFIGURAÇÃO =====
-let carrinho = []
-let precoUSD = 28      // preço em dólar
-const taxaCambio = 5.2 // 1 USD = 5,2 R$
 
+let carrinho = []
+let precoUSD = 26
+let taxaCambio = 5.2
 let valorFrete = 0
+
+async function atualizarCambio() {
+    try {
+        const resposta = await fetch("https://economia.awesomeapi.com.br/json/last/USD-BRL")
+        const dados = await resposta.json()
+
+        taxaCambio = parseFloat(dados.USDBRL.bid)
+        console.log("Dólar atualizado:", taxaCambio)
+
+    } catch (erro) {
+        console.error("Erro ao buscar dólar:", erro)
+    }
+
+   
+}
+
+atualizarCambio()
+
+setInterval(atualizarCambio, 10000) // atualiza a cada 1 minuto
 
 function toggleCarrinho(){
     document.getElementById("carrinho").classList.toggle("ativo")
 }
 
 function addCarrinho(){
-    // converte para reais ao adicionar
     const precoBRL = precoUSD * taxaCambio
-    carrinho.push({nome: "Pizza", preco: precoBRL})
+    carrinho.push({nome: "Lasagnette", preco: precoBRL})
     atualizarCarrinho()
 }
 
@@ -262,21 +279,36 @@ function atualizarCarrinho(){
     document.getElementById("total").innerText = (subtotal + valorFrete).toFixed(2)
 }
 
-// ===== CEP =====
+
 async function buscarEnderecoPorCEP(cep) {
     const cepLimpo = cep.replace(/\D/g, '')
     if (cepLimpo.length !== 8) throw new Error("CEP inválido")
 
-    const response = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`)
+    const response = await fetch(`https://brasilapi.com.br/api/cep/v1/${cepLimpo}`)
     const data = await response.json()
 
-    if (data.erro) throw new Error("CEP não encontrado")
+    if (!data.cep) throw new Error("CEP não encontrado")
     return data
 }
 
-function calcularFrete(uf){
-    const tabela = { SP:15, RJ:18, MG:20, PR:25, SC:28, RS:30, BA:28, PE:30, AM:45 }
-    return tabela[uf] || 30
+
+function calcularFreteAPI(uf) {
+
+    const regioes = {
+        norte: ["AM","PA","AC","RO","RR","AP","TO"],
+        nordeste: ["BA","SE","AL","PE","PB","RN","CE","PI","MA"],
+        centro: ["DF","GO","MT","MS"],
+        sudeste: ["SP","RJ","MG","ES"],
+        sul: ["PR","SC","RS"]
+    }
+
+    if (regioes.sudeste.includes(uf)) return 15
+    if (regioes.sul.includes(uf)) return 25
+    if (regioes.centro.includes(uf)) return 22
+    if (regioes.nordeste.includes(uf)) return 30
+    if (regioes.norte.includes(uf)) return 45
+
+    return 35
 }
 
 async function consultarCEP(){
@@ -286,18 +318,20 @@ async function consultarCEP(){
 
     try{
         let endereco = await buscarEnderecoPorCEP(cep)
-        valorFrete = calcularFrete(endereco.uf)
+
+        valorFrete = calcularFreteAPI(endereco.state)
 
         resultado.innerHTML = `
-            <p>${endereco.localidade} - ${endereco.uf}</p>
+            <p>${endereco.city} - ${endereco.state}</p>
             <p>Frete: R$ ${valorFrete.toFixed(2)}</p>
         `
+
         atualizarCarrinho()
+
     }catch(e){
         resultado.innerHTML = `<p style="color:red">${e.message}</p>`
     }
 }
-</script>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
