@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Fretes</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+<style>
+
+.navbar {
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+
+/* HERO */
+.hero {
+    height: 80vh;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('img/RISTORANTE.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+}
+
+/* LOGO NAVBAR */
+.navbar-brand img {
+    height: 40px;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.507);
+}
+
+.navbar .nav-link:hover {
+    color: #dddddd8a;
+}
+
+/* FRETES */
+.fretes {
+    background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url('img/comidas.jpg');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    min-height: 100vh; /* ocupa tela inteira */
+    display: flex;
+    align-items: center;
+}
+
+/* CARD FRETE */
+.frete-box {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    padding: 15px;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+.frete-box:hover {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.05);
+}
+
+/* FOOTER */
+.footer-custom {
+    background: #000;
+    color: white;
+    padding: 60px 0;
+}
+
+.logo-footer {
+    height: 70px;
+}
+
+.titulo-redes {
+    display: inline-block;
+    background: white;
+    color: black;
+    padding: 5px 15px;
+    font-weight: bold;
+}
+
+.redes i {
+    font-size: 22px;
+    margin: 0 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.redes i:hover {
+    transform: scale(1.2);
+}
+
+.user {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+<div class="container">
+
+<a class="navbar-brand" href="#">
+    <img src="img/logo.png" alt="Logo">
+</a>
+
+<button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+<span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="collapse navbar-collapse" id="menu">
+<ul class="navbar-nav ms-auto">
+<li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+<li class="nav-item"><a class="nav-link" href="servicos.html">Serviços</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Cardápio</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Reservas</a></li>
+<li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+</ul>
+</div>
+
+</div>
+</nav>
+
+<!-- FRETES -->
+<section class="fretes py-5 text-center">
+<div class="container">
+
+<h1 class="mb-4">Fretes</h1>
+<p class="mb-5">Consulte os valores de entrega para cada região</p>
+
+<div class="row justify-content-center">
+
+<div class="col-md-3 frete-box">São Paulo<br><strong>R$ 15</strong></div>
+<div class="col-md-3 frete-box">Rio de Janeiro<br><strong>R$ 18</strong></div>
+<div class="col-md-3 frete-box">Minas Gerais<br><strong>R$ 20</strong></div>
+<div class="col-md-3 frete-box">Paraná<br><strong>R$ 25</strong></div>
+<div class="col-md-3 frete-box">Santa Catarina<br><strong>R$ 28</strong></div>
+<div class="col-md-3 frete-box">Rio Grande do Sul<br><strong>R$ 30</strong></div>
+<div class="col-md-3 frete-box">Bahia<br><strong>R$ 28</strong></div>
+<div class="col-md-3 frete-box">Pernambuco<br><strong>R$ 30</strong></div>
+<div class="col-md-3 frete-box">Amazonas<br><strong>R$ 45</strong></div>
+
+</div>
+
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer-custom">
+<div class="container">
+<div class="row text-center text-md-start align-items-center">
+
+<div class="col-md-4 mb-4">
+<img src="img/logo.png" class="logo-footer">
+</div>
+
+<div class="col-md-4 text-center">
+<h4 class="titulo-redes">nossas redes</h4>
+
+<div class="redes mt-3">
+<i class="bi bi-whatsapp"></i>
+<i class="bi bi-tiktok"></i>
+<i class="bi bi-instagram"></i>
+</div>
+
+<p class="user">@ristorante</p>
+</div>
+
+<div class="col-md-2">
+<h5>Localização</h5>
+<p>Av. Francisco Rodrigues, 171</p>
+</div>
+
+<div class="col-md-2">
+<h5>Contato</h5>
+<p>11 00000-0000</p>
+</div>
+
+</div>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
